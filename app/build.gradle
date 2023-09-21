@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+    defaultConfig {
+        applicationId "com.example.fiyatgor11"
+        minSdkVersion 15
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        prod {
+            buildConfigField 'String', 'API_URL', '"http://url.to.api/v1/"'
+            buildConfigField 'String', 'API_KEY', '"123456"'
+
+            buildConfigField 'String', 'DB_IP', '"locahost:1453"'
+            buildConfigField 'String', 'DB_CLASS', '"net.sourceforge.jtds.jdbc.Driver"'
+            buildConfigField 'String', 'DB_NAME', '"SMARTPOS_V44_2019"'
+            buildConfigField 'String', 'DB_USER', '"sa"'
+            buildConfigField 'String', 'DB_PASS', '"sa123"'
+        }
+    }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //implementation project('jtds-1.2.7')
+    implementation files('libs/core-3.4.0.jar')
+    implementation files('libs/barcode4j-2.1.jar')
+    implementation files('libs/barbecue-1.5-beta1.jar')
+}
